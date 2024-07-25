@@ -20,7 +20,7 @@
 
 title: Aleksander Hübert
 description: >- # this means to ignore newlines until "baseurl:"
-  This sit is a blog to showcase the work and thoughts of Aleksander Hubert
+  This site is a blog to showcase the work and thoughts of Aleksander Hubert
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "abhubert.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: abhubert

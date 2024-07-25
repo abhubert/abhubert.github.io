@@ -11,7 +11,7 @@ permalink: /Resume/
 | :--- | ---: | 
 | Aug. 2023 -- Present | Atlanta, USA|
 
-- Developing algorithms and machine learning solutions that saved over \$20M in false network issue alarms.
+- Developing algorithms and machine learning solutions that aims to save millions in false network issue alarms.
 - Perfoming data cleaning, analysis, and modeling on networks and signal streams to detect outliers and network weaknesses to improve network reliability.
 - Building pipelines using AWS, Databricks, and Spark to ingest, process, and publish data streams of network alarms and hardware telemetry data to aid the field techs' problem discovery and remediation.
 - Writing custom algorithms for processing network telemetry, utilizing concepts in graph theory and network science to optimize network traffic flows and improve network uptime to hit a reliability goal of 99.9%.
