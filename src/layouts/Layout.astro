@@ -1,0 +1,238 @@
+---
+// src/layouts/Layout.astro
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Mathematician & Developer exploring the intersection of mathematical thinking and software craft" } = Astro.props;
+const currentPath = Astro.url.pathname;
+import { MY_NAME } from '../consts';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+<body>
+    <div class="ambient-background"></div>
+    <div class="mystical-overlay"></div>
+
+    <div class="nav-sticky">
+      
+      <nav class="nav">
+        <div class="starfield"></div>
+        <div class="nav-container">
+            <a href="/" class="nav-brand">
+              <span class="brand-name">{MY_NAME}</span>
+            </a>
+            <div class="nav-menu">
+              <a href="/" class={currentPath === '/' ? 'nav-item active' : 'nav-item'}>Home</a>
+              <a href="/posts" class={currentPath.startsWith('/posts') ? 'nav-item active' : 'nav-item'}>Posts</a>
+              <a href="/about" class={currentPath === '/about' ? 'nav-item active' : 'nav-item'}>About</a>
+            </div>
+        </div>
+      </nav>
+    </div>
+
+    <main class="main">
+        <slot />
+    </main>
+
+    <footer class="footer">
+        <div class="starfield"></div>
+        <div class="footer-container">
+
+            <div class="footer-content">
+
+                <p class="footer-text">© {new Date().getFullYear()} Aleksander Hubert</p>
+                <div class="footer-links">
+                    <a href="https://github.com/abhubert" class="footer-link">GitHub</a>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+</body>
+</html>
+
+<style>
+    @keyframes gentleDrift {
+        0% { transform: translateX(0) translateY(0) scale(1); }
+        100% { transform: translateX(-20px) translateY(-10px) scale(1.02); }
+    }
+
+    @keyframes slowDrift {
+        0%   { transform: translateX(0) translateY(0) scale(1); }
+        50%  { transform: translateX(-80px) translateY(-30px) scale(1.02); }
+        100% { transform: translateX(-160px) translateY(10px) scale(1); }
+    }
+
+    @keyframes starfieldDrift {
+    0%   { transform: translateX(0) translateY(0) scale(1); }
+    20%  { transform: translateX(-60px) translateY(-15px) scale(1.01); }
+    40%  { transform: translateX(-120px) translateY(30px) scale(1.02); }
+    60%  { transform: translateX(-180px) translateY(-10px) scale(1.01); }
+    80%  { transform: translateX(-240px) translateY(20px) scale(1.03); }
+    100% { transform: translateX(-300px) translateY(0) scale(1); }
+    }
+    @keyframes starfieldDrift2 {
+    0%   { transform: translateX(0) translateY(0) scale(1); }
+    25%  { transform: translateX(-80px) translateY(30px) scale(1.01); }
+    50%  { transform: translateX(-160px) translateY(-20px) scale(1.02); }
+    75%  { transform: translateX(-240px) translateY(10px) scale(1.01); }
+    100% { transform: translateX(-320px) translateY(0) scale(1); }
+    }
+
+    .ambient-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background: 
+            radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.07) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(124, 152, 133, 0.07) 0%, transparent 50%),
+            radial-gradient(circle at 40% 80%, rgba(139, 126, 200, 0.05) 0%, transparent 50%);
+        z-index: -6;
+        animation: gentleDrift 40s ease-in-out infinite alternate;
+    }
+
+    .starfield,
+    .starfield2
+    { 
+    position: fixed;
+    top: 0;
+    width: 200vw;
+    height: 100vh;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: -6;
+    }
+
+    .starfield {
+        opacity: 0.9;
+        background-image:
+            radial-gradient(3px 3px at 40px 60px, var(--silver-mist) 70%, transparent 100%),
+            radial-gradient(2px 2px at 120px 100px, var(--ancient-gold) 80%, transparent 100%),
+            radial-gradient(2px 2px at 200px 30px, var(--mystic-blue) 80%, transparent 100%),
+            radial-gradient(1px 1px at 80px 140px, #fff 90%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 180px 90px, #fff 90%, transparent 100%),
+            radial-gradient(1px 1px at 220px 60px, var(--accent-warm) 90%, transparent 100%),
+            radial-gradient(1px 1px at 60px 120px, var(--accent-cool) 90%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 170px 40px, #fff 90%, transparent 100%),
+            radial-gradient(2px 2px at 30px 100px, var(--silver-mist) 80%, transparent 100%),
+            radial-gradient(1px 1px at 210px 130px, var(--accent-purple) 90%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 300px 200px, #fff 90%, transparent 100%),
+            radial-gradient(2px 2px at 350px 50px, var(--accent-cool) 80%, transparent 100%),
+            radial-gradient(1px 1px at 100px 200px, var(--ancient-gold) 80%, transparent 100%);
+        background-size:
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px,
+            400px 240px;
+        background-repeat:
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat;
+        animation: starfieldDrift 120s linear infinite;
+    }
+    .starfield2 {
+        opacity: 0.5;
+        background-image:
+            radial-gradient(2px 2px at 100px 200px, #fff 80%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 300px 100px, var(--accent-cool) 80%, transparent 100%),
+            radial-gradient(1px 1px at 500px 300px, var(--ancient-gold) 80%, transparent 100%),
+            radial-gradient(1.5px 1.5px at 600px 50px, #fff 90%, transparent 100%),
+            radial-gradient(2px 2px at 200px 350px, var(--accent-purple) 80%, transparent 100%);
+        background-size:
+            700px 400px,
+            700px 400px,
+            700px 400px,
+            700px 400px,
+            700px 400px;
+        background-repeat:
+            repeat,
+            repeat,
+            repeat,
+            repeat,
+            repeat;
+        animation: starfieldDrift2 180s linear infinite;
+    }
+        /* Mystical atmosphere */
+        @keyframes gentleShift {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        .mystical-overlay {
+            position: fixed;
+    top: 0;
+    width: 200vw;
+    height: 200vh;
+    left: 50%;
+    pointer-events: none;
+    transform: translateX(-50%);  
+    z-index: -6;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(168, 29, 122, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(21, 101, 192, 0.3) 0%, transparent 60%);
+            animation: gentleShift slowDrift 30s ease-in-out infinite alternate;
+        }
+
+    .nav-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    background: transparent;
+
+    }
+
+    .nav-sticky .starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200vw;
+    height: 100%;
+    pointer-events: none; /* ensures nav is clickable */
+    z-index: 0;
+    opacity: 0.9;
+    /* your starfield background-image and animation */
+    }
+
+    .nav {
+    position: relative;
+    z-index: 1;
+    /* nav styles */
+    }
+</style>

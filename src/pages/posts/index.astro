@@ -1,0 +1,46 @@
+---
+// src/pages/posts/index.astro
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const sortedPosts = posts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Posts - Your Name">
+    <div class="page-container">
+        <header class="page-header">
+            <h1>Posts</h1>
+            <p>Thoughts on mathematics, programming, and their beautiful intersection</p>
+        </header>
+        <div class="posts-list">
+            {sortedPosts.map((post) => (
+                <article class="post-item">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}
+                    </time>
+                    <h2><a href={`/posts/${post.slug}/`}>{post.data.title}</a></h2>
+                    <p>{post.data.description}</p>
+                    <div class="post-meta">
+                        {post.data.readingTime && (
+                            <span class="reading-time">{post.data.readingTime}</span>
+                        )}
+                        {post.data.tags && (
+                            <span class="tags">
+                                {post.data.tags.map(tag => (
+                                    <span class="tag">{tag}</span>
+                                ))}
+                            </span>
+                        )}
+                    </div>
+                </article>
+            ))}
+        </div>
+    </div>
+</Layout>

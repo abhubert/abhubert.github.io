@@ -1,0 +1,76 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const recentPosts = posts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+---
+
+<Layout title="Aleksander">
+    <div class="page-container">
+        <header class="page-header">
+            <h1 class="page-title">Aleksander Brynjulf Hübert</h1>
+            <p class="page-subtitle">
+                I make music, design, bike, and write code. I studied mathematics and now I work on making cables move information faster. 
+            </p>
+        </header>
+
+        <section class="about-preview">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <p>
+                    I am Aleksander a machine learning engineer and software developer with a background in mathematics. I have a passion for exploring the intersection of mathematical thinking and software craft. My work focuses on applying mathematical tools and thinking to solve complex problems with a particular focus on networks, communication systems, and graph theory. 
+                </p>
+                <p>
+                    Beyond my professional interests, I enjoy biking around the city, making music, and engaging in creative projects that blend art and technology. I am particularly interested in older techonological contraints and how they influenced the problem solving approaches of the time.
+                </p>
+                <h4 class="section-subtitle">Current Focus</h4>
+                <ul class="focus-list">
+                    <li>Machine Learning and AI</li>
+                    <li>Cassette Tapes</li>
+                    <li>Type theory and formal methods</li>
+                    <li>Technical Diagrams and Drafting</li>
+                </ul>
+                <a href="/about" class="read-more-link">More about me →</a>
+            </div>
+        </section>
+            <section class="recent-posts">
+                <h2 class="section-title">Recent Posts</h2>
+                <div class="posts-list">
+                    {recentPosts.map((post) => (
+                        <article class="post-item">
+                            <h3 class="post-title">
+                                <a href={`/posts/${post.slug}/`} class="post-link">
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="post-description">{post.data.description}</p>
+                            <div class="post-meta">
+                                <time class="post-date" datetime={post.data.pubDate.toISOString()}>
+                                    {post.data.pubDate.toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    })}
+                                </time>
+                                {post.data.tags && post.data.tags.length > 0 && (
+                                    <div class="post-tags">
+                                        {post.data.tags.slice(0, 3).map(tag => (
+                                            <span class="post-tag">{tag}</span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </article>
+                    ))}
+                </div>
+                <div class="section-footer">
+                    <a href="/posts" class="view-all-link">View all posts →</a>
+                </div>
+            </section>
+    </div>
+</Layout>
