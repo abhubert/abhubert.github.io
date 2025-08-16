@@ -20,7 +20,7 @@ tags: ["blog", "LSE", "math"]
 
   In the 1940s Stanisław Ulam and John von Neumann began developing the idea of <b>cellular automata</b>. Cellular automata consist of cells in an infinite grid and a set of rules for how to update the set of each cell. These constructions have proven useful in studying biological process, physics, and computing. With each step forward in time, the cells in the grid evolve depending on the number of states, the shape of the cells, and the rules to how they evolve complex structures and modeled behaviour can arise.
 
-![glider](../../assets/images/glider_state.png)
+![glider](/assets/images/glider_state.png)
 <p align="center">
   <b>Glider States in Conway's Game of Life</b><br>
   <em>Figure: The glider pattern is a fundamental moving structure in Conway's Game of Life.</em>
@@ -30,7 +30,7 @@ tags: ["blog", "LSE", "math"]
 
   The ideas of Turing completeness within Conway's Game of Life are fleshed out in the dissertation by building logic gates and circuits within the Game of Life using various constructions to simulate information transfer and logic. Then proving the Turing equivalence of the construction.
 
-![nor](../../assets/images/nor_noinput.png)
+![nor](/assets/images/nor_noinput.png)
 <p align="center">
   <b>NOR Gate in Conway's Game of Life</b><br>
   <em>Figure: The NOR gate pattern demonstrates logical computation in Conway's Game of Life.</em>
